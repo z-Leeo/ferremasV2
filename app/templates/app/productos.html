@@ -1,105 +1,55 @@
 {% extends 'base.html'%}
 {% block contenido %}
 {% load static %}
-<div class="container">
+
     <h2>Productos</h2>
     
-    <!-- Primera fila de productos (3 productos) -->
-    <div class="row">
-        <!-- Producto 1 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/llave.jpg' %}" alt="Producto 1">
-                    <div class="detalle">
-                        <h5>Producto 1</h5>
-                        <h2>Descripción del Producto 1</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarritoAjax('Producto 1', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px;
+        }
+
+        .card {
+            width: calc(33.33% - 20px); /* El 20px es el margen entre las tarjetas */
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Productos</h1>
+    <div class="container">
+        {% for producto in productos %}
+        <div class="card">
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            <h2>{{ producto.nombre }}</h2>
+            <p>Precio: ${{ producto.precio }}</p>
+            <p>Descripción: {{ producto.descripcion }}</p>
+            <p>Marca: {{ producto.marca }}</p>
+            <form action="{% url 'carrito' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="producto_id" value="{{ producto.idProducto }}">
+                <button type="submit">Agregar al carrito</button>
+            </form>
         </div>
-        
-        <!-- Producto 2 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/makitaelectrica.webp' %}" alt="Producto 2">
-                    <div class="detalle">
-                        <h5>Producto 2</h5>
-                        <h2>Descripción del Producto 2</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarrito('Producto 2', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Producto 3 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/einhell-expert-zug-kapp-gehrungss_auml_7ivlboaf12ktp7gs.webp' %}" alt="Producto 3">
-                    <div class="detalle">
-                        <h5>Producto 3</h5>
-                        <h2>Descripción del Producto 3</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarrito('Producto 3', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
-    
-    <!-- Segunda fila de productos (3 productos) -->
-    <div class="row">
-        <!-- Producto 4 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/1050061.webp' %}" alt="Producto 4">
-                    <div class="detalle">
-                        <h5>Producto 4</h5>
-                        <h2>Descripción del Producto 4</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarrito('Producto 4', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Producto 5 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/clavos_2_p3gpxzhfdeqdbluo.webp' %}" alt="Producto 5">
-                    <div class="detalle">
-                        <h5>Producto 5</h5>
-                        <h2>Descripción del Producto 5</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarrito('Producto 5', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Producto 6 -->
-        <div class="col-sm-4">
-            <div class="productos">
-                <div class="contenedor_productos">
-                    <img src="{% static 'img/pintura.webp' %}" alt="Producto 6">
-                    <div class="detalle">
-                        <h5>Producto 6</h5>
-                        <h2>Descripción del Producto 6</h2>
-                        <h3>Precio: $XX.XX</h3>
-                        <button onclick="agregarAlCarrito('Producto 6', XX.XX)">Añadir al Carrito</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+</body>
+</html>
+
 
 <script src="{% static 'js/java.js' %}"></script>
 
