@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block contenido %}
+{% load static %}
+<div class="container">
+    <h2>Explora nuestras categorías</h2>
+    <div class="row">
+        <!-- Contenedor de la categoría 1 -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'categoria' 'maquinaria' %}" class="card">
+                <img src="{% static 'img/m1.jpg' %}" class="card-img-top" alt="maquinaria">
+                <div class="card-body">
+                    <h5 class="card-title">Maquinaria</h5>
+                    <p class="card-text">Descubre nuestra selección de maquinaria.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Contenedor de la categoría 2 -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'categoria' 'hogar' %}" class="card">
+                <img src="{% static 'img/hogar.jpg' %}" class="card-img-top" alt="Hogar">
+                <div class="card-body">
+                    <h5 class="card-title">Hogar</h5>
+                    <p class="card-text">Descubre productos para el hogar y decoración.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- Contenedor de la categoría 3 -->
+        <div class="col-md-4 mb-4">
+            <a href="{% url 'categoria' 'ropa' %}" class="card">
+                <img src="{% static 'img/ropa.jpg' %}" class="card-img-top" alt="Ropa">
+                <div class="card-body">
+                    <h5 class="card-title">Ropa</h5>
+                    <p class="card-text">Explora la última moda y tendencias en ropa.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

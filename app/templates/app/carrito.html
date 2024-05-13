@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block contenido %}
+{%load static%}
+<div class="container">
+    <h2>Carrito de Compras</h2>
+    {% if carrito %}
+        <ul class="list-group">
+            {% for producto in carrito %}
+                <li class="list-group-item">
+                    <div>
+                        <strong>{{ producto.nombre }}</strong>
+                        <span class="float-right">${{ producto.precio }}</span>
+                    </div>
+                    <button onclick="eliminarDelCarrito('{{ producto.nombre }}')">Eliminar</button>
+                </li>
+            {% endfor %}
+        </ul>
+        <hr>
+        <p class="text-right">Total: <strong>${{ total }}</strong></p>
+        <a href="{% url 'procesar_pago' %}" class="btn btn-primary">Procesar Pago</a>
+        <button onclick="vaciarCarrito()" class="btn btn-danger">Vaciar Carrito</button>
+    {% else %}
+        <p>Su carrito está vacío.</p>
+    {% endif %}
+</div>
+
+<script>
+    // Función para eliminar un producto del carrito
+    function eliminarDelCarrito(nombreProducto) {
+        // Implementa la lógica para eliminar el producto del carrito
+        // Por ejemplo, puedes usar AJAX para enviar una solicitud al servidor
+        // y actualizar el carrito sin necesidad de recargar la página
+        
+        alert(`Producto ${nombreProducto} eliminado del carrito.`);
+    }
+    
+    // Función para vaciar todo el carrito
+    function vaciarCarrito() {
+        // Implementa la lógica para vaciar el carrito
+        // Por ejemplo, puedes eliminar todos los productos del carrito en la sesión del usuario
+        
+        alert('Carrito vaciado.');
+    }
+</script>
+<script src="{% static 'app/js/java.js' %}"></script>
+{% endblock %}
+
+
